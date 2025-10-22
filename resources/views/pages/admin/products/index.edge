@@ -1,0 +1,73 @@
+@layout.app({ title: title || 'Manage Products - ShiftUp' })
+
+  @slot('content')
+    <section class="relative pt-24 pb-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          <h1 class="text-3xl font-extrabold text-primary">
+            Manage Products
+          </h1>
+          <a href="{{ route('admin.products.create') }}" class="btn-primary">Create</a>
+        </div>
+
+        <div class="mt-6 overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow-smx">
+            <thead class="bg-gray-50">
+              <tr class="text-left text-sm text-gray-600">
+                <th class="py-3 px-4">
+                  #
+                </th>
+                <th class="py-3 px-4">
+                  Name
+                </th>
+                <th class="py-3 px-4">
+                  Category
+                </th>
+                <th class="py-3 px-4">
+                  Price
+                </th>
+                <th class="py-3 px-4">
+                  Active
+                </th>
+                <th class="py-3 px-4">
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              @each(p in products)
+                <tr class="text-sm">
+                  <td class="py-3 px-4">
+                    {{ p.id }}
+                  </td>
+                  <td class="py-3 px-4">
+                    {{ p.name }}
+                  </td>
+                  <td class="py-3 px-4">
+                    {{ p.category }}
+                  </td>
+                  <td class="py-3 px-4">
+                    Rp {{ Number(p.price).toLocaleString('id-ID') }}
+                  </td>
+                  <td class="py-3 px-4">
+                    {{ p.isActive ? 'Yes' : 'No' }}
+                  </td>
+                  <td class="py-3 px-4">
+                    <div class="flex items-center gap-2">
+                      <a
+                        href="{{ route('admin.products.edit', { id: p.id }) }}"
+                        class="inline-flex rounded-md px-3 py-2 border text-sm hover:bg-gray-50"
+                      >Edit</a>
+                      <form action="{{ route('admin.products.destroy', { id: p.id }) }}" method="post">
+                        @csrf()
+                          <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Delete</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                @endeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    @endslot

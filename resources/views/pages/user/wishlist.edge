@@ -1,0 +1,50 @@
+@layout.app({ title: title || 'Your Wishlist - ShiftUp' })
+
+  @slot('content')
+    <section class="relative pt-24 pb-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-extrabold text-primary">
+          Your Wishlist
+        </h1>
+
+        @if(items.length === 0)
+          <p class="mt-6 text-text-secondary">
+            Your wishlist is empty. <a href="{{ route('products.index') }}" class="text-primary">Find templates</a>.
+          </p>
+        @else
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @each(it in items)
+              <article class="card overflow-hidden flex flex-col">
+                <img
+                  src="{{ it.product.thumbnailImage || 'https://picsum.photos/seed/'+it.product.id+'/640/360' }}"
+                  class="h-40 w-full object-cover"
+                  alt=""
+                />
+                <div class="p-5 flex-1 flex flex-col">
+                  <h3 class="font-semibold text-primary">
+                    {{ it.product.name }}
+                  </h3>
+                  <div class="mt-auto flex items-center justify-between pt-4">
+                    <span class="font-extrabold text-text-main">Rp {{ Number(it.product.price).toLocaleString('id-ID') }}</span>
+                    <div class="flex gap-2">
+                      <form action="{{ route('cart.add') }}" method="post">
+                        @csrf()
+                          <input type="hidden" name="product_id" value="{{ it.product.id }}" />
+                          <button class="btn-primary">Add to Cart</button>
+                        </form>
+                        <form action="{{ route('wishlist.remove') }}" method="post">
+                          @csrf()
+                            <input type="hidden" name="id" value="{{ it.id }}" />
+                            <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Remove</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                @endeach
+              </div>
+            @endif
+          </div>
+        </section>
+      @endslot
+    @end

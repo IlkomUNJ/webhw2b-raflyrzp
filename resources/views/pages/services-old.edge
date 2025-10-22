@@ -1,0 +1,169 @@
+@layout.app({ title: "Services - ShiftUp" })
+
+  @slot('content')
+    <!-- Hero -->
+    <section class="relative pt-16">
+      <div class="relative h-[320px] md:h-[380px] overflow-hidden">
+        <img
+          src="/images/hero/services.jpg"
+          alt="Our Services"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/60">
+        </div>
+
+        <div class="relative z-10 flex h-full items-center justify-center px-4 text-center text-white">
+          <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-5xl font-extrabold">
+              Our Services
+            </h1>
+            <p class="mt-3 text-white/90">
+              We provide modern IT solutions to help your business grow and stay
+              ahead in the digital era.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Offer -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-primary">
+            What We Offer
+          </h2>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Company Profile Website -->
+          <div class="card p-8">
+            <h3 class="text-center font-semibold text-primary">
+              Company Profile<br />Website
+            </h3>
+            <p class="mt-4 text-center text-sm text-text-secondary leading-relaxed">
+              Professional company profile websites designed to strengthen your
+              business branding.
+            </p>
+          </div>
+
+          <!-- Online Store Website -->
+          <div class="card p-8">
+            <h3 class="text-center font-semibold text-primary">
+              Online Store Website
+            </h3>
+            <p class="mt-4 text-center text-sm text-text-secondary leading-relaxed">
+              Modern e-commerce with complete features like product catalog,
+              shopping cart, and online payment integration.
+            </p>
+          </div>
+
+          <!-- Custom Web Application -->
+          <div class="card p-8">
+            <h3 class="text-center font-semibold text-primary">
+              Custom Web<br />Application
+            </h3>
+            <p class="mt-4 text-center text-sm text-text-secondary leading-relaxed">
+              Tailor-made web applications tailored to your business needs, offering
+              optimal performance and high security.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-primary">
+            Our Pricing Packages
+          </h2>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Basic -->
+          <article class="card p-8">
+            <h3 class="text-center text-primary font-semibold">
+              Basic
+            </h3>
+            <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
+              Rp 2.500.000
+            </p>
+            <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
+              <li>
+                1 Website Company Profile
+              </li>
+              <li>
+                Responsive Design
+              </li>
+              <li>
+                Free 1 Year Hosting
+              </li>
+              <li>
+                Basic Support
+              </li>
+            </ul>
+            <div class="mt-8">
+              <a href="/" class="btn-primary w-full">Choose Basic</a>
+            </div>
+          </article>
+
+          <!-- Standard -->
+          <article class="card p-8">
+            <h3 class="text-center text-primary font-semibold">
+              Standard
+            </h3>
+            <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
+              Rp 5.000.000
+            </p>
+            <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
+              <li>
+                Website E‑Commerce
+              </li>
+              <li>
+                Responsive & Modern Design
+              </li>
+              <li>
+                Payment Gateway Integration
+              </li>
+              <li>
+                Priority Support
+              </li>
+            </ul>
+            <div class="mt-8">
+              <a href="/" class="btn-primary w-full">Choose Standard</a>
+            </div>
+          </article>
+
+          <!-- Premium -->
+          <article class="card p-8">
+            <h3 class="text-center text-primary font-semibold">
+              Premium
+            </h3>
+            <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
+              Rp 10.000.000
+            </p>
+            <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
+              <li>
+                Custom Web Application
+              </li>
+              <li>
+                Advanced Security
+              </li>
+              <li>
+                Dedicated Server
+              </li>
+              <li>
+                Full Support & Maintenance
+              </li>
+            </ul>
+            <div class="mt-8">
+              <a href="/" class="btn-primary w-full">Choose Premium</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  @endslot
+@end

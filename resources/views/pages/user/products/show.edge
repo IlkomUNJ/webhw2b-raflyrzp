@@ -1,0 +1,59 @@
+@layout.app({ title: title || 'Template - ShiftUp' })
+
+  @slot('content')
+    <section class="relative pt-24 pb-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+        <div>
+          <img
+            src="{{ product.thumbnailImage || 'https://picsum.photos/seed/'+product.id+'/960/540' }}"
+            alt="{{ product.name }}"
+            class="w-full rounded-xl shadow-lgx"
+          />
+          @if(product.demoUrl)
+            <a href="{{ product.demoUrl }}" target="_blank" class="btn-primary mt-4 inline-flex">Live Demo</a>
+          @endif
+        </div>
+        <div>
+          <h1 class="text-3xl font-extrabold text-primary">
+            {{ product.name }}
+          </h1>
+          <p class="mt-3 text-text-secondary">
+            {{ product.description || '' }}
+          </p>
+
+          <div class="mt-6">
+            <div class="text-sm text-gray-600">
+              Category
+            </div>
+            <div class="font-semibold">
+              {{ product.category }}
+            </div>
+          </div>
+
+          <div class="mt-6 text-2xl font-extrabold text-text-main">
+            Rp {{ Number(product.price).toLocaleString('id-ID') }}
+          </div>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <form action="{{ route('cart.add') }}" method="post">
+              @csrf()
+                <input type="hidden" name="product_id" value="{{ product.id }}" />
+                <button type="submit" class="btn-primary">Add to Cart</button>
+              </form>
+
+              <form action="{{ route('wishlist.add') }}" method="post">
+                @csrf()
+                  <input type="hidden" name="product_id" value="{{ product.id }}" />
+                  <button
+                    type="submit"
+                    class="inline-flex items-center justify-center rounded-md px-5 py-2 font-semibold text-primary border border-primary hover:bg-primary hover:text-white transition"
+                  >
+                    Add to Wishlist
+          </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      @endslot
+    @end
