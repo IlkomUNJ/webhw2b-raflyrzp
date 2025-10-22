@@ -1,0 +1,67 @@
+@layout.app({ title: title || 'Login - ShiftUp' })
+
+  @slot('content')
+    <section class="relative pt-24 pb-12 bg-white">
+      <div class="max-w-2xl mx-auto px-4">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl md:text-4xl font-extrabold text-primary">
+            Welcome Back
+          </h1>
+          <p class="mt-2 text-text-muted">
+            Login to continue.
+          </p>
+        </div>
+
+        <div class="card p-6 md:p-8">
+          @if(flashMessages.get('errors')?.form)
+            <div class="mb-4 rounded-md bg-red-50 text-red-700 px-4 py-3 text-sm">
+              {{ flashMessages.get('errors').form[0] }}
+            </div>
+          @endif
+          
+          <form action="/auth/login" method="post" class="space-y-4">
+            {{ csrfField() }}
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                name="email"
+                value="{{ flashMessages.get('old')?.email || '' }}"
+                required
+                class="mt-1 w-full rounded-md border border-black/10 bg-white px-4 py-3 text-text-main focus:border-primary"
+                placeholder="you@example.com"
+              />
+              @if(flashMessages.get('errors')?.email)
+                <p class="mt-1 text-sm text-red-600">
+                  {{ flashMessages.get('errors').email[0] }}
+                </p>
+              @endif
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                name="password"
+                required
+                class="mt-1 w-full rounded-md border border-black/10 bg-white px-4 py-3 text-text-main focus:border-primary"
+                placeholder="••••••••"
+              />
+              @if(flashMessages.get('errors')?.password)
+                <p class="mt-1 text-sm text-red-600">
+                  {{ flashMessages.get('password', '') }}
+                </p>
+              @endif
+            </div>
+
+            <div class="flex items-center justify-between">
+              <a href="/auth/register" class="text-sm text-primary hover:opacity-80">Create account</a>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-3">Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  @endslot
+@end
