@@ -1,0 +1,215 @@
+@layout.app({title: "Home - ShiftUp"})
+
+  @slot('content')
+    <section
+      class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center text-white bg-cover bg-center"
+      style="background-image: url('/images/hero/home.jpg');"
+    >
+      <div class="absolute inset-0 bg-black/60">
+      </div>
+      <div class="relative z-10 px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-balance">
+          Where innovation meets elevation
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto text-white/90">
+          Explore the websites we've built, modern, scalable, and designed to elevate businesses.
+        </p>
+      </div>
+    </section>
+
+    <!-- Our Works -->
+    <section id="case-study" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4">
+            Our Works
+          </h2>
+          <p class="text-lg text-text-muted max-w-2xl mx-auto mb-16">
+            Take a look at some of our featured projects that highlight our design and development expertise.
+          </p>
+        </div>
+
+        <div class="space-y-20">
+          <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 rounded-xl overflow-hidden shadow-lgx">
+              <img
+                src="/images/showcase/amazon.png"
+                alt="Amazon"
+                class="w-full h-auto transition-transform duration-300 hover:scale-[1.02]"
+              />
+            </div>
+            <div class="md:w-1/2">
+              <h3 class="text-3xl font-bold text-primary mb-3">
+                Amazon
+              </h3>
+              <p class="text-text-secondary mb-6">
+                The world's leading multinational e-commerce and cloud computing company.
+              </p>
+              <a href="https://www.amazon.com" target="_blank" class="btn-primary">View Website</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+            <div class="md:w-1/2 rounded-xl overflow-hidden shadow-lgx">
+              <img
+                src="/images/showcase/icp-hub.png"
+                alt="ICP Hub"
+                class="w-full h-auto transition-transform duration-300 hover:scale-[1.02]"
+              />
+            </div>
+            <div class="md:w-1/2 md:text-right">
+              <h3 class="text-3xl font-bold text-primary mb-3">
+                ICP-Hub
+              </h3>
+              <p class="text-text-secondary mb-6">
+                An ecosystem for developers and entrepreneurs on the Internet Computer Protocol.
+              </p>
+              <a href="https://internetcomputer.org/" target="_blank" class="btn-primary">View Website</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 rounded-xl overflow-hidden shadow-lgx">
+              <img
+                src="/images/showcase/apple.png"
+                alt="Apple"
+                class="w-full h-auto transition-transform duration-300 hover:scale-[1.02]"
+              />
+            </div>
+            <div class="md:w-1/2">
+              <h3 class="text-3xl font-bold text-primary mb-3">
+                Apple
+              </h3>
+              <p class="text-text-secondary mb-6">
+                A global leader in consumer electronics, software, and online services.
+              </p>
+              <a href="https://www.apple.com" target="_blank" class="btn-primary">View Website</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-16">
+          <a href="/case-studies" class="btn-primary inline-block">More Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 section-muted">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-primary mb-12">
+          Our Pricing Packages
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="card p-8 transform hover:-translate-y-1 transition">
+            <h3 class="text-2xl font-bold text-primary mb-2">
+              Basic
+            </h3>
+            <p class="text-3xl font-bold text-text-main mb-6">
+              Rp 2.500.000
+            </p>
+            <ul class="text-text-secondary space-y-3 mb-8">
+              <li>
+                1 Website Company Profile
+              </li>
+              <li>
+                Responsive Design
+              </li>
+              <li>
+                Free 1 Year Hosting
+              </li>
+              <li>
+                Basic Support
+              </li>
+            </ul>
+            <a href="#" class="btn-primary-lg">Choose Basic</a>
+          </div>
+
+          <div class="card p-8 transform hover:-translate-y-1 transition">
+            <h3 class="text-2xl font-bold text-primary mb-2">
+              Standard
+            </h3>
+            <p class="text-3xl font-bold text-text-main mb-6">
+              Rp 5.000.000
+            </p>
+            <ul class="text-text-secondary space-y-3 mb-8">
+              <li>
+                Website E-Commerce
+              </li>
+              <li>
+                Responsive & Modern Design
+              </li>
+              <li>
+                Payment Gateway Integration
+              </li>
+              <li>
+                Priority Support
+              </li>
+            </ul>
+            <a href="#" class="btn-primary-lg">Choose Standard</a>
+          </div>
+
+          <div class="card p-8 transform hover:-translate-y-1 transition">
+            <h3 class="text-2xl font-bold text-primary mb-2">
+              Premium
+            </h3>
+            <p class="text-3xl font-bold text-text-main mb-6">
+              Rp 10.000.000
+            </p>
+            <ul class="text-text-secondary space-y-3 mb-8">
+              <li>
+                Custom Web Application
+              </li>
+              <li>
+                Advanced Security
+              </li>
+              <li>
+                Dedicated Server
+              </li>
+              <li>
+                Full Support & Maintenance
+              </li>
+            </ul>
+            <a href="#" class="btn-primary-lg">Choose Premium</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-100">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4">
+          Contact Us
+        </h2>
+        <p class="text-lg text-text-muted mb-8">
+          Fill out the form below and we'll get back to you as soon as possible.
+        </p>
+
+        <form action="#" method="post" class="space-y-6">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none focus:border-primary"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none focus:border-primary"
+          />
+          <textarea
+            name="message"
+            rows="6"
+            placeholder="Your Message"
+            required
+            class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none focus:border-primary"
+          ></textarea>
+          <button type="submit" class="btn-primary-lg">Send Message</button>
+        </form>
+      </div>
+    </section>
+  @endslot
+@end

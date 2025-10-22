@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+@source "../views";
+
+:root {
+  --primary: #256aa8;
+  --primary-dark: #165c98ff;
+
+  --text-main: #333;
+  --text-secondary: #555;
+  --text-muted: #6c757d;
+  --text-light: #fff;
+
+  --bg-light: #fff;
+  --bg-dark: #333;
+  --bg-gray: #f8f9fa;
+  --bg-gradient: linear-gradient(135deg, #f0f4ff, #e9f7ff);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    color: var(--text-main);
+    background: var(--bg-light);
+  }
+  :focus-visible {
+    outline: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md px-5 py-2 font-semibold text-white transition;
+    background: var(--primary);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+
+  .btn-primary-lg {
+    @apply inline-flex items-center justify-center rounded-md px-6 py-3 font-semibold text-white w-full transition;
+    background: var(--primary);
+    box-shadow: var(--shadow-md);
+  }
+  .btn-primary-lg:hover {
+    background: var(--primary-dark);
+  }
+
+  .card {
+    @apply rounded-xl bg-white;
+    box-shadow: var(--shadow-md);
+  }
+
+  .nav-surface {
+    @apply border-b border-black/5;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+  }
+
+  .section-muted {
+    background: var(--bg-gradient);
+  }
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--primary);
+  }
+  .hover\:text-primary:hover {
+    color: var(--primary);
+  }
+  .text-text-main {
+    color: var(--text-main);
+  }
+  .text-text-secondary {
+    color: var(--text-secondary);
+  }
+  .text-text-muted {
+    color: var(--text-muted);
+  }
+
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  .hover\:bg-primary-dark:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .border-primary {
+    border-color: var(--primary);
+  }
+  .focus\:border-primary:focus {
+    border-color: var(--primary);
+  }
+  .ring-primary {
+    --tw-ring-color: var(--primary);
+  }
+  .focus\:ring-primary:focus {
+    --tw-ring-color: var(--primary);
+  }
+
+  .shadow-smx {
+    box-shadow: var(--shadow-sm);
+  }
+  .shadow-mdx {
+    box-shadow: var(--shadow-md);
+  }
+  .shadow-lgx {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

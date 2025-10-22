@@ -1,0 +1,95 @@
+<header class="fixed top-0 left-0 w-full nav-surface z-50">
+  <input id="nav-toggle" type="checkbox" class="peer hidden" />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0">
+        <a href="/">
+          <img src="/images/logo/logo-navbar.png" alt="ShiftUp Logo" class="h-10 w-auto" />
+        </a>
+      </div>
+
+      <nav class="hidden md:flex md:items-center md:space-x-8">
+        <ul class="flex items-center space-x-8">
+          <li>
+            <a
+              href="/"
+              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('home')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
+              {{ ((title || '').toLowerCase().includes('home')) ? 'aria-current=page' : '' }}
+            >Home</a>
+          </li>
+          <li>
+            <a
+              href="/about"
+              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('about')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
+              {{ ((title || '').toLowerCase().includes('about')) ? 'aria-current=page' : '' }}
+            >About</a>
+          </li>
+          <li>
+            <a
+              href="/case-studies"
+              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('case studies')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
+              {{ ((title || '').toLowerCase().includes('case studies')) ? 'aria-current=page' : '' }}
+            >Case Studies</a>
+          </li>
+          <li>
+            <a
+              href="/services"
+              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('services')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
+              {{ ((title || '').toLowerCase().includes('services')) ? 'aria-current=page' : '' }}
+            >Services</a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('contact')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
+              {{ ((title || '').toLowerCase().includes('contact')) ? 'aria-current=page' : '' }}
+            >Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <label
+        for="nav-toggle"
+        class="p-2 -mr-2 text-3xl cursor-pointer md:hidden select-none"
+        aria-label="Toggle menu"
+      >
+        &#9776;
+      </label>
+    </div>
+  </div>
+
+  <div class="hidden peer-checked:block md:hidden">
+    <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-mdx">
+      <a
+        href="/"
+        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('home')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
+        {{ ((title || '').toLowerCase().includes('home')) ? 'aria-current=page' : '' }}
+      >Home</a>
+
+      <a
+        href="/about"
+        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('about')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
+        {{ ((title || '').toLowerCase().includes('about')) ? 'aria-current=page' : '' }}
+      >About</a>
+
+      <a
+        href="/case-studies"
+        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('case studies')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
+        {{ ((title || '').toLowerCase().includes('case studies')) ? 'aria-current=page' : '' }}
+      >Case Studies</a>
+
+      <a
+        href="/services"
+        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('services')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
+        {{ ((title || '').toLowerCase().includes('services')) ? 'aria-current=page' : '' }}
+      >Services</a>
+
+      <a
+        href="/contact"
+        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('contact')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
+        {{ ((title || '').toLowerCase().includes('contact')) ? 'aria-current=page' : '' }}
+      >Contact</a>
+    </nav>
+  </div>
+</header>
