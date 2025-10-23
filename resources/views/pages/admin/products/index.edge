@@ -18,6 +18,9 @@
                   #
                 </th>
                 <th class="py-3 px-4">
+                  Thumbnail
+                </th>
+                <th class="py-3 px-4">
                   Name
                 </th>
                 <th class="py-3 px-4">
@@ -39,6 +42,18 @@
                   <td class="py-3 px-4">
                     {{ p.id }}
                   </td>
+
+                  <td class="py-3 px-4">
+                    <div class="h-12 w-20 overflow-hidden rounded border bg-gray-50">
+                      <img
+                        src="{{ p.thumbnailImage || ('https://picsum.photos/seed/' + p.id + '/160/90') }}"
+                        alt="{{ p.name }}"
+                        class="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  </td>
+
                   <td class="py-3 px-4">
                     {{ p.name }}
                   </td>
@@ -59,7 +74,7 @@
                       >Edit</a>
                       <form action="{{ route('admin.products.destroy', { id: p.id }) }}" method="post">
                         {{ csrfField() }}
-                        <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Delete</button>
+                      <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Delete</button>
                       </form>
                     </div>
                   </td>

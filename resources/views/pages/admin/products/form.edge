@@ -1,110 +1,153 @@
-@layout.admin({ title: title || 'Product Form - ShiftUp' })
+@layout.app({ title })
 
   @slot('content')
-    <section class="relative pt-6 pb-12">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl md:text-3xl font-extrabold text-primary">
+    <section class="relative pt-24 pb-12">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-semibold text-primary">
           {{ product ? 'Edit Product' : 'Create Product' }}
         </h1>
 
         <form
-          action="{{ product ? route('admin.products.update', { id: product.id }) : route('admin.products.store') }}"
-          method="post"
-          class="mt-6 card p-6 space-y-4"
+          method="POST"
+          enctype="multipart/form-data"
+          action="{{ product
+          ? (route('admin.products.update', { id: product.id }) + '?_method=PUT')
+          : route('admin.products.store') }}"
+          class="mt-6 space-y-6"
         >
           {{ csrfField() }}
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              value="{{ product?.name || '' }}"
-              class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
-            />
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700">Slug (optional)</label>
+              <label class="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                type="text"
+                name="name"
+                value="{{ (old('name') !== undefined && old('name') !== null)
+                ? old('name')
+                : (product ? (product.name || '') : '') }}"
+                class="mt-1 w-full rounded-md border px-3 py-2"
+                required
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Slug</label>
               <input
                 type="text"
                 name="slug"
-                value="{{ product?.slug || '' }}"
-                class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
+                value="{{ (old('slug') !== undefined && old('slug') !== null)
+                ? old('slug')
+                : (product ? (product.slug || '') : '') }}"
+                class="mt-1 w-full rounded-md border px-3 py-2"
               />
             </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Price</label>
+              <input
+                type="number"
+                name="price"
+                value="{{ (old('price') !== undefined && old('price') !== null)
+                ? old('price')
+                : (product ? (product.price ?? '') : '') }}"
+                class="mt-1 w-full rounded-md border px-3 py-2"
+                required
+              />
+            </div>
+
             <div>
               <label class="block text-sm font-medium text-gray-700">Category</label>
               <input
                 type="text"
                 name="category"
+                value="{{ (old('category') !== undefined && old('category') !== null)
+                ? old('category')
+                : (product ? (product.category || '') : '') }}"
+                class="mt-1 w-full rounded-md border px-3 py-2"
                 required
-                value="{{ product?.category || '' }}"
-                class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
               />
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700">Description</label>
+              <textarea name="description" rows="5" class="mt-1 w-full rounded-md border px-3 py-2">{{ (old('description') !== undefined && old('description') !== null)
+                ? old('description')
+                : (product ? (product.description || '') : '') }}</textarea>
             </div>
           </div>
 
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Description</label>
-            <textarea
-              name="description"
-              rows="4"
-              class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
-            >{{ product?.description || '' }}</textarea>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Price</label>
-              <input
-                type="number"
-                min="0"
-                step="0.01"
-                name="price"
-                required
-                value="{{ product?.price || 0 }}"
-                class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
-              />
-            </div>
-            <div class="flex items-end gap-2">
-              <label class="inline-flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="is_active"
-                  value="true"
-                  class="rounded border-gray-300 text-primary focus:ring-primary"
-                  {{ product?.isActive ? 'checked' : '' }}
-                />
-                Active
-              </label>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Thumbnail URL</label>
-              <input
-                type="url"
-                name="thumbnail_image"
-                value="{{ product?.thumbnailImage || '' }}"
-                class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
-              />
-            </div>
-            <div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
               <label class="block text-sm font-medium text-gray-700">Demo URL</label>
               <input
                 type="url"
                 name="demo_url"
-                value="{{ product?.demoUrl || '' }}"
-                class="mt-1 w-full rounded-md border border-black/10 px-4 py-3 focus:border-primary"
+                value="{{ (old('demo_url') !== undefined && old('demo_url') !== null)
+                ? old('demo_url')
+                : (product ? (product.demoUrl || '') : '') }}"
+                class="mt-1 w-full rounded-md border px-3 py-2"
               />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Status</label>
+              <select name="is_active" class="mt-1 w-full rounded-md border px-3 py-2">
+                <option
+                  value="true"
+                  {{ (old('is_active') !== undefined && old('is_active') !== null)
+                  ? (String(old('is_active')) === 'true' ? 'selected' : '')
+                  : (product ? (product.isActive ? 'selected' : '') : 'selected') }}
+                >
+                  Active
+                </option>
+                <option
+                  value="false"
+                  {{ (old('is_active') !== undefined && old('is_active') !== null)
+                  ? (String(old('is_active')) === 'false' ? 'selected' : '')
+                  : (product ? (!product.isActive ? 'selected' : '') : '') }}
+                >
+                  Inactive
+                </option>
+              </select>
             </div>
           </div>
 
-          <div class="flex justify-end">
-            <button class="btn-primary px-6 py-3">{{ product ? 'Update' : 'Create' }}</button>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700">Thumbnail (jpg, jpeg, png)</label>
+              <input
+                type="file"
+                name="thumbnail_image"
+                accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-primary/90"
+              />
+              <p class="mt-1 text-xs text-gray-500">
+                Max 5MB. Uploading a new file will replace the current thumbnail.
+              </p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Current Thumbnail</label>
+              <div class="mt-1 aspect-[16/9] w-full overflow-hidden rounded border bg-gray-50">
+                @if(product?.thumbnailImage)
+                  <img src="{{ product.thumbnailImage }}" class="h-full w-full object-cover" alt="Current thumbnail" />
+                @else
+                  <div class="flex h-full w-full items-center justify-center text-xs text-gray-500">
+                    No thumbnail
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3">
+            <a href="{{ route('admin.products.index') }}" class="rounded-md border px-4 py-2 text-sm">Cancel</a>
+            <button
+              type="submit"
+              class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
+            >
+              {{ product ? 'Update' : 'Create' }}
+        </button>
           </div>
         </form>
       </div>
