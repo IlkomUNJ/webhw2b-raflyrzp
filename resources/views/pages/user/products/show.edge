@@ -41,7 +41,7 @@
               <button type="submit" class="btn-primary">Add to Cart</button>
             </form>
 
-            <form action="{{ route('wishlist.add') }}" method="post">
+            <form action="{{ route('user.wishlist.add') }}" method="post">
               {{ csrfField() }}
                 <input type="hidden" name="product_id" value="{{ product.id }}" />
               <button

@@ -6,7 +6,7 @@
   <div class="h-16 flex items-center px-4 border-b">
     <a href="{{ route('home') }}" class="flex items-center gap-2">
       <img src="/images/logo/logo-navbar.png" alt="ShiftUp" class="h-8 w-auto" />
-      <span class="font-semibold">ShiftUp Admin</span>
+      <span class="font-semibold">Admin</span>
     </a>
   </div>
 
@@ -29,18 +29,12 @@
       href="{{ route('admin.products.create') }}"
       class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
     >Create Product</a>
-
-    <div class="pt-2 mt-2 border-t">
-    </div>
-
     <a
-      href="{{ route('products.index') }}"
-      class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-    >View Templates (Site)</a>
-    <a
-      href="{{ route('home') }}"
-      class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-    >Back to Website</a>
+      href="{{ route('admin.wishlists.index') }}"
+      class="block rounded-md px-3 py-2 text-sm font-medium transition
+    {{ ((title || '').toLowerCase().includes('wishlist')) ? 'bg-[rgba(37,106,168,0.08)] text-primary' : 'text-gray-700 hover:bg-gray-50' }}"
+      aria-current="{{ ((title || '').toLowerCase().includes('wishlist')) ? 'page' : '' }}"
+    >Wishlists</a>
 
     <form action="{{ route('admin.auth.logout') }}" method="post" class="pt-2 mt-2 border-t">
       {{ csrfField() }}

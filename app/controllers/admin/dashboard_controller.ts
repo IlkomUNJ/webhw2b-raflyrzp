@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import Order from '#models/order'
 
-export default class DashboardAdminController {
+export default class AdminDashboardController {
   async index({ view }: HttpContext) {
     // Total revenue
     const revenueRow = await db.from('orders').sum({ totalRevenue: 'total' }).first()

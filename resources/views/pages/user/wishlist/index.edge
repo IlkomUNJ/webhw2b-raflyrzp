@@ -32,7 +32,7 @@
                           <input type="hidden" name="product_id" value="{{ it.product.id }}" />
                         <button class="btn-primary">Add to Cart</button>
                       </form>
-                      <form action="{{ route('wishlist.remove') }}" method="post">
+                      <form action="{{ route('user.wishlist.remove') }}" method="post">
                         {{ csrfField() }}
                             <input type="hidden" name="id" value="{{ it.id }}" />
                         <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Remove</button>

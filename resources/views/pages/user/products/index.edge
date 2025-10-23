@@ -11,7 +11,6 @@
             Choose a template, preview the demo, and start your project.
           </p>
 
-          <!-- Search bar -->
           <form
             method="GET"
             action="{{ route ? route('products.index') : '/templates' }}"
@@ -31,15 +30,14 @@
 
           @if(q)
             <p class="mt-3 text-sm text-text-secondary">
-              Menampilkan hasil untuk: "<span class="font-semibold">{{ q }}</span>"
+              Showing results for: "<span class="font-semibold">{{ q }}</span>"
             </p>
           @end
         </div>
 
-        <!-- Grid Products -->
         @if(products.all().length === 0)
           <div class="mt-12 text-center text-text-secondary">
-            Tidak ada template yang cocok{{ q ? ' untuk "' + q + '"' : '' }}.
+            There{{ q ? ' are no results for "' + q + '"' : ' are no templates available.' }}.
           </div>
         @else
           <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -67,32 +65,17 @@
           </div>
         @end
         
-        <!-- Pagination -->
-        <div class="mt-8 flex items-center justify-center gap-4">
-          @if(meta?.previousPageUrl)
-            <a href="{{ meta.previousPageUrl }}" class="btn-secondary px-3 py-2 rounded-md">Previous</a>
-          @end
-          
-          <span class="text-sm text-text-secondary">
-            Page {{ meta?.currentPage || 1 }} of {{ meta?.lastPage || 1 }}
-          </span>
-
-          @if(meta?.nextPageUrl)
-            <a href="{{ meta.nextPageUrl }}" class="btn-secondary px-3 py-2 rounded-md">Next</a>
-          @end
-        </div>
-
-        {{-- Jika ingin render manual page number, bisa dibuat loop dari 1..meta.lastPage --}}
-        {{-- Contoh cepat:
         <div class="mt-4 flex justify-center gap-2">
-          @for(let i = 1; i <= (meta?.lastPage || 1); i++)
-            <a href="{{ (route ? route('products.index') : '/templates') + '?page=' + i + (q ? '&q=' + encodeURIComponent(q) : '') }}"
-               class="px-3 py-1 rounded border {{ i === meta.currentPage ? 'bg-primary text-white border-primary' : 'border-gray-300 text-gray-700' }}">
-              {{ i }}
-            </a>
-          @endfor
+          @each(page in pages)
+            <a
+              href="{{ (route ? route('products.index') : '/templates') + '?page=' + page + (q ? '&q=' + encodeURIComponent(q) : '') }}"
+              class="px-3 py-1 rounded border {{ page === meta.currentPage ? 'bg-primary text-white border-primary' : 'border-gray-300 text-gray-700' }}"
+            >
+              {{ page }}
+    </a>
+          @endeach
         </div>
-        --}}
+
       </div>
     </section>
   @endslot

@@ -66,9 +66,9 @@ router
     const WishlistController = () => import('#controllers/wishlists_controller')
     router
       .group(() => {
-        router.get('/', [WishlistController, 'index']).as('wishlist.index')
-        router.post('/add', [WishlistController, 'add']).as('wishlist.add')
-        router.post('/remove', [WishlistController, 'remove']).as('wishlist.remove')
+        router.get('/', [WishlistController, 'index']).as('user.wishlist.index')
+        router.post('/add', [WishlistController, 'add']).as('user.wishlist.add')
+        router.post('/remove', [WishlistController, 'remove']).as('user.wishlist.remove')
       })
       .prefix('/wishlist')
 
@@ -99,15 +99,12 @@ router
     router
       .post('/products/:id/delete', [AdminProductsController, 'destroy'])
       .as('admin.products.destroy')
+
+    const AdminDashboardController = () => import('#controllers/admin/dashboard_controller')
+    router.get('/dashboard', [AdminDashboardController, 'index']).as('admin.dashboard')
+
+    const AdminWishlistsController = () => import('#controllers/admin/wishlists_controller')
+    router.get('/wishlists', [AdminWishlistsController, 'index']).as('admin.wishlists.index')
   })
   .prefix('/admin')
   .use(middleware.admin())
-
-const DashboardAdminController = () => import('#controllers/dashboard_admin_controller')
-router.get('/admin/dashboard', [DashboardAdminController, 'index']).as('admin.dashboard')
-
-// router.get('/whoami', async ({ auth }) => {
-//   const web = auth.use('web')
-//   await web.check()
-//   return { isLoggedIn: web.isAuthenticated, user: web.user }
-// })

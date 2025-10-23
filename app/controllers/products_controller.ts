@@ -24,12 +24,14 @@ export default class ProductsController {
     }
 
     const meta = products.getMeta()
+    const pages = Array.from({ length: meta?.lastPage || 1 }, (_, i) => i + 1)
 
     return view.render('pages/user/products/index', {
       title: 'Templates - ShiftUp',
       products,
       meta,
       q,
+      pages,
     })
   }
 

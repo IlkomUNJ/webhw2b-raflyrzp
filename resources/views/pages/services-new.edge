@@ -15,64 +15,90 @@
         <div class="relative z-10 flex h-full items-center justify-center px-4 text-center text-white">
           <div class="max-w-3xl">
             <h1 class="text-4xl md:text-5xl font-extrabold">
-              Our Services
+              Templates & Services
             </h1>
             <p class="mt-3 text-white/90">
-              We provide modern IT solutions to help your business grow and stay
-              ahead in the digital era.
+              Explore ready–made website templates and our professional services to launch faster and scale with confidence.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- What We Offer -->
+    <!-- Templates (Products) -->
     <section class="py-16 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h2 class="text-3xl md:text-4xl font-extrabold text-primary">
-            What We Offer
+            Website Templates
           </h2>
+          <p class="mt-3 text-text-muted">
+            Choose a template, preview the demo, and start your project.
+          </p>
         </div>
 
-        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Company Profile Website -->
-          <div class="card p-8">
-            <h3 class="text-center font-semibold text-primary">
-              Company Profile<br />Website
-            </h3>
-            <p class="mt-4 text-center text-sm text-text-secondary leading-relaxed">
-              Professional company profile websites designed to strengthen your
-              business branding.
-            </p>
-          </div>
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          @each(product in (products?.all() || products))
+            <article class="card overflow-hidden flex flex-col">
+              <img
+                src="{{ product.thumbnailImage || 'https://picsum.photos/seed/' + product.id + '/640/360' }}"
+                alt="{{ product.name }}"
+                class="h-44 w-full object-cover"
+              />
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="font-semibold text-primary">
+                  {{ product.name }}
+                </h3>
+                <p class="mt-1 text-sm text-text-secondary line-clamp-3">
+                  {{ product.description || '' }}
+                </p>
 
-          <!-- Online Store Website -->
-          <div class="card p-8">
-            <h3 class="text-center font-semibold text-primary">
-              Online Store Website
-            </h3>
-            <p class="mt-4 text-center text-sm text-text-secondary leading-relaxed">
-              Modern e-commerce with complete features like product catalog,
-              shopping cart, and online payment integration.
-            </p>
-          </div>
+                <div class="mt-4 flex items-center justify-between">
+                  <span class="font-extrabold text-text-main">Rp {{ Number(product.price).toLocaleString('id-ID') }}</span>
+                  <a href="{{ route('products.show', { slug: product.slug }) }}" class="btn-primary">View</a>
+                </div>
 
-          <!-- Custom Web Application -->
-          <div class="card p-8">
-            <h3 class="text-center font-semibold text-primary">
-              Custom Web<br />Application
-            </h3>
-            <p class="mt-4 text-center text-sm text-text-secondary leading-relaxed">
-              Tailor-made web applications tailored to your business needs, offering
-              optimal performance and high security.
-            </p>
-          </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <form action="{{ route('cart.add') }}" method="post">
+                    {{ csrfField() }}
+                      <input type="hidden" name="product_id" value="{{ product.id }}" />
+                    <button class="btn-primary">Add to Cart</button>
+                  </form>
+
+                  <form action="{{ route('wishlist.add') }}" method="post">
+                    {{ csrfField() }}
+                        <input type="hidden" name="product_id" value="{{ product.id }}" />
+                    <button
+                      class="inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold text-primary border border-primary hover:bg-primary hover:text-white transition"
+                    >
+                      Wishlist
+                    </button>
+                  </form>
+
+                  @if(product.demoUrl)
+                    <a
+                      href="{{ product.demoUrl }}"
+                      target="_blank"
+                      class="inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold border hover:bg-gray-50"
+                    >
+                      Live Demo
+                    </a>
+                  @endif
+                </div>
+              </div>
+            </article>
+          @endeach
         </div>
+
+        @if(products?.render)
+          <div class="mt-8">
+            {{ products.render() }}
+          </div>
+        @endif
       </div>
     </section>
 
-    <!-- Pricing -->
+    <!-- Pricing (keep service packages) -->
     <section class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
@@ -105,7 +131,7 @@
               </li>
             </ul>
             <div class="mt-8">
-              <a href="/" class="btn-primary w-full">Choose Basic</a>
+              <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Basic</a>
             </div>
           </article>
 
@@ -132,7 +158,7 @@
               </li>
             </ul>
             <div class="mt-8">
-              <a href="/" class="btn-primary w-full">Choose Standard</a>
+              <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Standard</a>
             </div>
           </article>
 
@@ -159,7 +185,7 @@
               </li>
             </ul>
             <div class="mt-8">
-              <a href="/" class="btn-primary w-full">Choose Premium</a>
+              <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Premium</a>
             </div>
           </article>
         </div>
