@@ -1,7 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import WishlistItem from '#models/wishlist_item'
-// import Product from '#models/product'
-// import User from '#models/user'
 
 export default class AdminWishlistsController {
   async index({ request, view }: HttpContext) {

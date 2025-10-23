@@ -18,7 +18,7 @@ export default class AdminDashboardController {
 
     const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0
 
-    // Revenue by month (SQLite strftime)
+    // Revenue by month
     const byMonthRows = await db
       .from('orders')
       .select(db.raw("strftime('%Y-%m', created_at) as ym"))
@@ -32,7 +32,7 @@ export default class AdminDashboardController {
     }))
     const maxRevenueMonth = Math.max(1, ...revenueByMonth.map((r) => r.revenue))
 
-    // Top products (best sellers) using order_items
+    // Top products
     const topProducts = await db
       .from('order_items as oi')
       .leftJoin('products as p', 'p.id', 'oi.product_id')
@@ -43,7 +43,7 @@ export default class AdminDashboardController {
       .orderBy('qty', 'desc')
       .limit(5)
 
-    // Recent orders (last 10) with user + items preload
+    // Recent orders
     const recentOrders = await Order.query()
       .orderBy('createdAt', 'desc')
       .preload('user')

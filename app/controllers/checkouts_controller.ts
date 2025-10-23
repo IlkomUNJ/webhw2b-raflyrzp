@@ -41,7 +41,6 @@ export default class CheckoutsController {
 
     await CartItem.query().where('userId', user.id).delete()
 
-    // Gunakan named route supaya stabil
     return response.redirect().toRoute('orders.show', { id: order.id })
   }
 }
