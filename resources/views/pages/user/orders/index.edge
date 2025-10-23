@@ -1,0 +1,56 @@
+@layout.app({ title: title || 'My Orders - ShiftUp' })
+
+  @slot('content')
+    <section class="relative pt-24 pb-12">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-extrabold text-primary">
+          My Orders
+        </h1>
+
+        @if(!orders || orders.length === 0)
+          <div class="mt-6 text-gray-500">
+            Belum ada pesanan.
+          </div>
+        @else
+          <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full border rounded-md">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-4 py-2 text-left">
+                    Order
+                  </th>
+                  <th class="px-4 py-2 text-left">
+                    Status
+                  </th>
+                  <th class="px-4 py-2 text-right">
+                    Total
+                  </th>
+                  <th class="px-4 py-2">
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                @each(o in orders)
+                  <tr>
+                    <td class="px-4 py-2">
+                      #{{ o.id }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ o.status }}
+                    </td>
+                    <td class="px-4 py-2 text-right">
+                      Rp {{ Number(o.total).toLocaleString('id-ID') }}
+                    </td>
+                    <td class="px-4 py-2 text-right">
+                      <a href="{{ route('orders.show', { id: o.id }) }}" class="btn-primary btn-sm">Lihat</a>
+                    </td>
+                  </tr>
+                @endeach
+              </tbody>
+            </table>
+          </div>
+        @end
+      </div>
+    </section>
+  @endslot
+@end

@@ -9,9 +9,10 @@ import Order from '#models/order'
 import OrderItem from '#models/order_item'
 
 export default class extends BaseSeeder {
-  public static environment = ['development', 'testing']
+  public static environment: string[] = ['development', 'testing']
 
   public async run() {
+    // Bersihkan data lama
     await db.from('order_items').delete()
     await db.from('orders').delete()
     await db.from('cart_items').delete()
@@ -19,21 +20,29 @@ export default class extends BaseSeeder {
     await db.from('products').delete()
     await db.from('users').delete()
 
-    // 1) Users
+    // 1) Users (Admin + 2 user biasa)
     const [john, jane] = await User.createMany([
+      {
+        name: 'Admin',
+        email: 'admin@gmail.com',
+        password: 'password',
+        role: 'admin', // PENTING: role admin
+      },
       {
         name: 'John Doe',
         email: 'john@example.com',
         password: 'password',
+        role: 'user',
       },
       {
         name: 'Jane Smith',
         email: 'jane@example.com',
         password: 'password',
+        role: 'user',
       },
     ])
 
-    // 2) Products (Templates)
+    // 2) Products
     const products = await Product.createMany([
       {
         name: 'Agency Portfolio',
@@ -117,7 +126,7 @@ export default class extends BaseSeeder {
       { userId: john.id, productId: productA.id },
     ])
 
-    // 5) Order + Order Items (contoh pembelian selesai untuk John)
+    // 5) Order + Order Items untuk John
     const orderTotal = Number(productA.price) * 1 + Number(productB.price) * 2
 
     const order = await Order.create({
@@ -143,12 +152,13 @@ export default class extends BaseSeeder {
       },
     ])
 
-    // 6) (Opsional) Keranjang Jane kosong, tapi tambahkan wishlist contoh
+    // 6) Wishlist contoh untuk Jane
     await WishlistItem.create({
       userId: jane.id,
       productId: productB.id,
     })
 
-    console.log('Seed completed: users, products, cart, wishlist, orders, order_items')
+    console.log('✅ Seed completed with admin role')
+    console.log('🔑 Admin login -> email: admin@gmail.com | password: password')
   }
 }

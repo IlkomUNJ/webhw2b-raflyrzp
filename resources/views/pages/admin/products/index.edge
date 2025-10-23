@@ -1,10 +1,10 @@
-@layout.app({ title: title || 'Manage Products - ShiftUp' })
+@layout.admin({ title: title || 'Manage Products - ShiftUp' })
 
   @slot('content')
-    <section class="relative pt-24 pb-12">
+    <section class="relative pt-6 pb-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between">
-          <h1 class="text-3xl font-extrabold text-primary">
+          <h1 class="text-2xl md:text-3xl font-extrabold text-primary">
             Manage Products
           </h1>
           <a href="{{ route('admin.products.create') }}" class="btn-primary">Create</a>
@@ -58,16 +58,17 @@
                         class="inline-flex rounded-md px-3 py-2 border text-sm hover:bg-gray-50"
                       >Edit</a>
                       <form action="{{ route('admin.products.destroy', { id: p.id }) }}" method="post">
-                        @csrf()
-                          <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Delete</button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                @endeach
-              </tbody>
-            </table>
-          </div>
+                        {{ csrfField() }}
+                        <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Delete</button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              @endeach
+            </tbody>
+          </table>
         </div>
-      </section>
-    @endslot
+      </div>
+    </section>
+  @endslot
+@end

@@ -9,7 +9,7 @@ export default class CartsController {
     const items = await CartItem.query().where('userId', user.id).preload('product')
     const subtotal = items.reduce((sum, it) => sum + Number(it.product.price) * it.quantity, 0)
 
-    return view.render('cart/index', {
+    return view.render('pages/user/cart/index', {
       title: 'Your Cart - ShiftUp',
       items,
       subtotal,

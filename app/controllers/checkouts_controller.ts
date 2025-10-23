@@ -11,7 +11,7 @@ export default class CheckoutsController {
       return response.redirect().toPath('/cart')
     }
     const total = items.reduce((sum, it) => sum + Number(it.product.price) * it.quantity, 0)
-    return view.render('checkout/show', { title: 'Checkout - ShiftUp', items, total })
+    return view.render('pages/user/checkout/index', { title: 'Checkout - ShiftUp', items, total })
   }
 
   async place({ auth, response }: HttpContext) {
@@ -41,6 +41,7 @@ export default class CheckoutsController {
 
     await CartItem.query().where('userId', user.id).delete()
 
-    return response.redirect().toPath(`/orders/${order.id}`)
+    // Gunakan named route supaya stabil
+    return response.redirect().toRoute('orders.show', { id: order.id })
   }
 }

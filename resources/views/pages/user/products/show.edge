@@ -36,24 +36,24 @@
 
           <div class="mt-6 flex flex-wrap gap-3">
             <form action="{{ route('cart.add') }}" method="post">
-              @csrf()
+              {{ csrfField() }}
                 <input type="hidden" name="product_id" value="{{ product.id }}" />
-                <button type="submit" class="btn-primary">Add to Cart</button>
-              </form>
+              <button type="submit" class="btn-primary">Add to Cart</button>
+            </form>
 
-              <form action="{{ route('wishlist.add') }}" method="post">
-                @csrf()
-                  <input type="hidden" name="product_id" value="{{ product.id }}" />
-                  <button
-                    type="submit"
-                    class="inline-flex items-center justify-center rounded-md px-5 py-2 font-semibold text-primary border border-primary hover:bg-primary hover:text-white transition"
-                  >
-                    Add to Wishlist
+            <form action="{{ route('wishlist.add') }}" method="post">
+              {{ csrfField() }}
+                <input type="hidden" name="product_id" value="{{ product.id }}" />
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-md px-5 py-2 font-semibold text-primary border border-primary hover:bg-primary hover:text-white transition"
+              >
+                Add to Wishlist
           </button>
-                </form>
-              </div>
-            </div>
+            </form>
           </div>
-        </section>
-      @endslot
-    @end
+        </div>
+      </div>
+    </section>
+  @endslot
+@end

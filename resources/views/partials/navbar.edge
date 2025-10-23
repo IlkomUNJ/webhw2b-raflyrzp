@@ -1,50 +1,47 @@
 <header class="fixed top-0 left-0 w-full nav-surface z-50">
-  <!-- CSS-only toggle (peer) -->
   <input id="nav-toggle" type="checkbox" class="peer hidden" />
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="{{ route('home') }}">
           <img src="/images/logo/logo-navbar.png" alt="ShiftUp Logo" class="h-10 w-auto" />
         </a>
       </div>
 
-      <!-- Desktop nav -->
       <nav class="hidden md:flex md:items-center md:space-x-8">
         <ul class="flex items-center space-x-8">
           <li>
             <a
-              href="{{ route('home') }}"
+              href="{{ route ? route('home') : '/' }}"
               class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('home')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
               {{ ((title || '').toLowerCase().includes('home')) ? 'aria-current=page' : '' }}
             >Home</a>
           </li>
           <li>
             <a
-              href="{{ route('about') }}"
+              href="{{ route ? route('about') : '/about' }}"
               class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('about')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
               {{ ((title || '').toLowerCase().includes('about')) ? 'aria-current=page' : '' }}
             >About</a>
           </li>
           <li>
             <a
-              href="{{ route('case_studies') }}"
-              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('case')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
-              {{ ((title || '').toLowerCase().includes('case')) ? 'aria-current=page' : '' }}
-            >Case Studies</a>
+              href="{{ route ? route('products.index') : '/products' }}"
+              class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('templates')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
+              {{ ((title || '').toLowerCase().includes('templates')) ? 'aria-current=page' : '' }}
+            >Templates</a>
           </li>
           <li>
             <a
-              href="{{ route('services') }}"
+              href="{{ route ? route('services') : '/services' }}"
               class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('services')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
               {{ ((title || '').toLowerCase().includes('services')) ? 'aria-current=page' : '' }}
             >Services</a>
           </li>
           <li>
             <a
-              href="{{ route('contact') }}"
+              href="{{ route ? route('contact') : '/contact' }}"
               class="font-medium transition-colors {{ ((title || '').toLowerCase().includes('contact')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary' }}"
               {{ ((title || '').toLowerCase().includes('contact')) ? 'aria-current=page' : '' }}
             >Contact</a>
@@ -52,7 +49,80 @@
         </ul>
       </nav>
 
-      <!-- Mobile trigger -->
+      <div class="hidden md:flex items-center gap-4">
+        <a
+          href="{{ route ? route('cart.index') : '/cart' }}"
+          class="relative p-2 text-gray-600 hover:text-primary"
+          aria-label="Cart"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M2.25 3h1.386c.51 0 .955.343 1.086.835l.383 1.437m0 0L6.75 12.75m-1.645-7.478h13.04a1.125 1.125 0 011.096 1.393l-1.5 6A1.125 1.125 0 0116.69 13.5H7.31a1.125 1.125 0 01-1.09-.857L5.105 6.772zM9 20.25a.75.75 0 100-1.5.75.75 0 000 1.5zm8.25 0a.75.75 0 100-1.5.75.75 0 000 1.5z"
+            />
+          </svg>
+          @if(((cartCount || 0) > 0))
+            <span
+              class="absolute -top-1 -right-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-[10px] leading-none h-4 min-w-[16px] px-1"
+            >
+              {{ cartCount }}
+            </span>
+          @endif
+        </a>
+        @if(!(auth && auth.user))
+          <a
+            href="{{ route('auth.login.show') }}"
+            class="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-white hover:bg-primary/90"
+          >
+            Login
+          </a>
+        @else
+          <div class="relative">
+            <details class="group relative">
+              <summary
+                class="list-none cursor-pointer rounded-full p-1 hover:ring-2 hover:ring-primary/30 inline-flex items-center"
+                aria-label="User menu"
+              >
+                <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M15.75 6.75a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 19.5a7.5 7.5 0 1115 0v.75H4.5v-.75z"
+                    />
+                  </svg>
+                </span>
+              </summary>
+              <div class="absolute right-0 mt-2 w-44 rounded-md border bg-white py-1 shadow-lg z-50">
+                <div class="px-3 py-2 text-sm text-gray-600 truncate">
+                  {{ user?.fullName || user?.username || user?.email }}
+                </div>
+                <form method="POST" action="{{ route('auth.logout') }}">
+                  <button type="submit" class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    Logout
+                  </button>
+                </form>
+              </div>
+            </details>
+          </div>
+        @endif
+      </div>
+
       <label
         for="nav-toggle"
         class="p-2 -mr-2 text-3xl cursor-pointer md:hidden select-none"
@@ -63,7 +133,6 @@
     </div>
   </div>
 
-  <!-- Mobile menu -->
   <div class="hidden peer-checked:block md:hidden">
     <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-mdx">
       <a
@@ -75,9 +144,9 @@
         class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('about')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
       >About</a>
       <a
-        href="{{ route('case_studies') }}"
-        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('case')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
-      >Case Studies</a>
+        href="{{ route('products.index') }}"
+        class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('templates')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
+      >Templates</a>
       <a
         href="{{ route('services') }}"
         class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('services')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
@@ -86,6 +155,36 @@
         href="{{ route('contact') }}"
         class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('contact')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
       >Contact</a>
+
+      <a
+        href="{{ route('cart.index') }}"
+        class="flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+      >
+        <span>Cart</span>
+        @if(((cartCount || 0) > 0))
+          <span
+            class="ml-2 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-[10px] leading-none h-4 min-w-[16px] px-1"
+          >
+            {{ cartCount }}
+          </span>
+        @endif
+      </a>
+
+      @if(!user)
+        <a
+          href="{{ route('auth.login.show') }}"
+          class="block px-3 py-2 rounded-md text-base font-medium bg-primary text-white hover:bg-primary/90"
+        >Login</a>
+      @else
+        <form method="POST" action="{{ route('auth.logout') }}" class="px-3 pt-2">
+          <button
+            type="submit"
+            class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+          >
+            Logout
+          </button>
+        </form>
+      @endif
     </nav>
   </div>
 </header>

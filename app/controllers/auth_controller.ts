@@ -20,7 +20,7 @@ export default class AuthController {
     await auth.use('web').login(user)
 
     session.flash('success', 'Welcome back!')
-    return response.redirect().toRoute('user.home')
+    return response.redirect().toRoute('home')
   }
 
   async showRegister({ view }: HttpContext) {

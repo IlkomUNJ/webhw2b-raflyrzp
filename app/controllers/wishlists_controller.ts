@@ -7,7 +7,7 @@ export default class WishlistsController {
   async index({ auth, view }: HttpContext) {
     const user = auth.user!
     const items = await WishlistItem.query().where('userId', user.id).preload('product')
-    return view.render('wishlist/index', { title: 'Your Wishlist - ShiftUp', items })
+    return view.render('pages/user/wishlist/index', { title: 'Your Wishlist - ShiftUp', items })
   }
 
   async add({ auth, request, response, session }: HttpContext) {

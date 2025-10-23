@@ -3,18 +3,21 @@ import Product from '#models/product'
 import { createProductValidator, updateProductValidator } from '#validators/product'
 
 export default class AdminProductsController {
-  // List
   async index({ view }: HttpContext) {
     const products = await Product.query().orderBy('createdAt', 'desc')
-    return view.render('admin/products/index', { title: 'Manage Products - ShiftUp', products })
+    return view.render('pages/admin/products/index', {
+      title: 'Manage Products - ShiftUp',
+      products,
+    })
   }
 
-  // Create form
   async create({ view }: HttpContext) {
-    return view.render('admin/products/form', { title: 'Create Product - ShiftUp', product: null })
+    return view.render('pages/admin/products/form', {
+      title: 'Create Product - ShiftUp',
+      product: null,
+    })
   }
 
-  // Store
   async store({ request, response, session }: HttpContext) {
     const payload = await request.validateUsing(createProductValidator)
     await Product.create({
@@ -31,14 +34,15 @@ export default class AdminProductsController {
     return response.redirect().toPath('/admin/products')
   }
 
-  // Edit form
   async edit({ params, view, response }: HttpContext) {
     const product = await Product.find(params.id)
     if (!product) return response.notFound('Product not found')
-    return view.render('admin/products/form', { title: `Edit ${product.name} - ShiftUp`, product })
+    return view.render('pages/admin/products/form', {
+      title: `Edit ${product.name} - ShiftUp`,
+      product,
+    })
   }
 
-  // Update
   async update({ params, request, response, session }: HttpContext) {
     const product = await Product.find(params.id)
     if (!product) return response.notFound('Product not found')
@@ -61,7 +65,6 @@ export default class AdminProductsController {
     return response.redirect().toPath('/admin/products')
   }
 
-  // Delete
   async destroy({ params, response, session }: HttpContext) {
     const product = await Product.find(params.id)
     if (!product) return response.notFound('Product not found')

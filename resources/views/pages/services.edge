@@ -60,136 +60,136 @@
 
                 <div class="mt-3 flex flex-wrap gap-2">
                   <form action="{{ route('cart.add') }}" method="post">
-                    @csrf()
+                    {{ csrfField() }}
                       <input type="hidden" name="product_id" value="{{ product.id }}" />
-                      <button class="btn-primary">Add to Cart</button>
-                    </form>
+                    <button class="btn-primary">Add to Cart</button>
+                  </form>
 
-                    <form action="{{ route('wishlist.add') }}" method="post">
-                      @csrf()
+                  <form action="{{ route('wishlist.add') }}" method="post">
+                    {{ csrfField() }}
                         <input type="hidden" name="product_id" value="{{ product.id }}" />
-                        <button
-                          class="inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold text-primary border border-primary hover:bg-primary hover:text-white transition"
-                        >
-                          Wishlist
+                    <button
+                      class="inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold text-primary border border-primary hover:bg-primary hover:text-white transition"
+                    >
+                      Wishlist
                     </button>
-                      </form>
+                  </form>
 
-                      @if(product.demoUrl)
-                        <a
-                          href="{{ product.demoUrl }}"
-                          target="_blank"
-                          class="inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold border hover:bg-gray-50"
-                        >
-                          Live Demo
+                  @if(product.demoUrl)
+                    <a
+                      href="{{ product.demoUrl }}"
+                      target="_blank"
+                      class="inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold border hover:bg-gray-50"
+                    >
+                      Live Demo
                     </a>
-                      @endif
-                    </div>
-                  </div>
-                </article>
-              @endeach
-            </div>
-
-            @if(products?.render)
-              <div class="mt-8">
-                {{ products.render() }}
+                  @endif
+                </div>
               </div>
-            @endif
+            </article>
+          @endeach
+        </div>
+
+        @if(products?.render)
+          <div class="mt-8">
+            {{ products.render() }}
           </div>
-        </section>
+        @endif
+      </div>
+    </section>
 
-        <!-- Pricing (keep service packages) -->
-        <section class="py-16 bg-gray-50">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-              <h2 class="text-3xl md:text-4xl font-extrabold text-primary">
-                Our Pricing Packages
-              </h2>
+    <!-- Pricing (keep service packages) -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-primary">
+            Our Pricing Packages
+          </h2>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Basic -->
+          <article class="card p-8">
+            <h3 class="text-center text-primary font-semibold">
+              Basic
+            </h3>
+            <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
+              Rp 2.500.000
+            </p>
+            <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
+              <li>
+                1 Website Company Profile
+              </li>
+              <li>
+                Responsive Design
+              </li>
+              <li>
+                Free 1 Year Hosting
+              </li>
+              <li>
+                Basic Support
+              </li>
+            </ul>
+            <div class="mt-8">
+              <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Basic</a>
             </div>
+          </article>
 
-            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <!-- Basic -->
-              <article class="card p-8">
-                <h3 class="text-center text-primary font-semibold">
-                  Basic
-                </h3>
-                <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
-                  Rp 2.500.000
-                </p>
-                <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
-                  <li>
-                    1 Website Company Profile
-                  </li>
-                  <li>
-                    Responsive Design
-                  </li>
-                  <li>
-                    Free 1 Year Hosting
-                  </li>
-                  <li>
-                    Basic Support
-                  </li>
-                </ul>
-                <div class="mt-8">
-                  <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Basic</a>
-                </div>
-              </article>
-
-              <!-- Standard -->
-              <article class="card p-8">
-                <h3 class="text-center text-primary font-semibold">
-                  Standard
-                </h3>
-                <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
-                  Rp 5.000.000
-                </p>
-                <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
-                  <li>
-                    Website E‑Commerce
-                  </li>
-                  <li>
-                    Responsive & Modern Design
-                  </li>
-                  <li>
-                    Payment Gateway Integration
-                  </li>
-                  <li>
-                    Priority Support
-                  </li>
-                </ul>
-                <div class="mt-8">
-                  <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Standard</a>
-                </div>
-              </article>
-
-              <!-- Premium -->
-              <article class="card p-8">
-                <h3 class="text-center text-primary font-semibold">
-                  Premium
-                </h3>
-                <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
-                  Rp 10.000.000
-                </p>
-                <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
-                  <li>
-                    Custom Web Application
-                  </li>
-                  <li>
-                    Advanced Security
-                  </li>
-                  <li>
-                    Dedicated Server
-                  </li>
-                  <li>
-                    Full Support & Maintenance
-                  </li>
-                </ul>
-                <div class="mt-8">
-                  <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Premium</a>
-                </div>
-              </article>
+          <!-- Standard -->
+          <article class="card p-8">
+            <h3 class="text-center text-primary font-semibold">
+              Standard
+            </h3>
+            <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
+              Rp 5.000.000
+            </p>
+            <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
+              <li>
+                Website E‑Commerce
+              </li>
+              <li>
+                Responsive & Modern Design
+              </li>
+              <li>
+                Payment Gateway Integration
+              </li>
+              <li>
+                Priority Support
+              </li>
+            </ul>
+            <div class="mt-8">
+              <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Standard</a>
             </div>
-          </div>
-        </section>
-      @endslot
-    @end
+          </article>
+
+          <!-- Premium -->
+          <article class="card p-8">
+            <h3 class="text-center text-primary font-semibold">
+              Premium
+            </h3>
+            <p class="mt-2 text-center text-2xl font-extrabold text-gray-900">
+              Rp 10.000.000
+            </p>
+            <ul class="mt-5 text-sm text-text-secondary space-y-3 text-center">
+              <li>
+                Custom Web Application
+              </li>
+              <li>
+                Advanced Security
+              </li>
+              <li>
+                Dedicated Server
+              </li>
+              <li>
+                Full Support & Maintenance
+              </li>
+            </ul>
+            <div class="mt-8">
+              <a href="{{ route('contact') }}" class="btn-primary w-full">Choose Premium</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  @endslot
+@end

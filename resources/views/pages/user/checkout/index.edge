@@ -31,11 +31,11 @@
           </div>
 
           <form action="{{ route('checkout.place') }}" method="post" class="mt-6">
-            @csrf()
+            {{ csrfField() }}
               <button type="submit" class="btn-primary w-full py-3">Place Order</button>
-            </form>
-          </div>
+          </form>
         </div>
-      </section>
-    @endslot
-  @end
+      </div>
+    </section>
+  @endslot
+@end

@@ -28,23 +28,23 @@
                     <span class="font-extrabold text-text-main">Rp {{ Number(it.product.price).toLocaleString('id-ID') }}</span>
                     <div class="flex gap-2">
                       <form action="{{ route('cart.add') }}" method="post">
-                        @csrf()
+                        {{ csrfField() }}
                           <input type="hidden" name="product_id" value="{{ it.product.id }}" />
-                          <button class="btn-primary">Add to Cart</button>
-                        </form>
-                        <form action="{{ route('wishlist.remove') }}" method="post">
-                          @csrf()
+                        <button class="btn-primary">Add to Cart</button>
+                      </form>
+                      <form action="{{ route('wishlist.remove') }}" method="post">
+                        {{ csrfField() }}
                             <input type="hidden" name="id" value="{{ it.id }}" />
-                            <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Remove</button>
-                          </form>
-                        </div>
-                      </div>
+                        <button class="inline-flex rounded-md px-3 py-2 border text-sm text-red-600 hover:bg-red-50">Remove</button>
+                      </form>
                     </div>
-                  </article>
-                @endeach
-              </div>
-            @endif
+                  </div>
+                </div>
+              </article>
+            @endeach
           </div>
-        </section>
-      @endslot
-    @end
+        @endif
+      </div>
+    </section>
+  @endslot
+@end

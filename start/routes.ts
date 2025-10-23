@@ -12,9 +12,7 @@ import router from '@adonisjs/core/services/router'
 
 const AuthController = () => import('#controllers/auth_controller')
 
-/**
- * Public auth (users)
- */
+// AUTH
 router
   .group(() => {
     router.get('/register', [AuthController, 'showRegister']).as('auth.register.show')
@@ -25,9 +23,7 @@ router
   })
   .prefix('/auth')
 
-/**
- * Admin auth
- */
+// ADMIN AUTH
 router
   .group(() => {
     router.get('/login', [AuthController, 'showLoginAdmin']).as('admin.auth.login.show')
@@ -39,25 +35,19 @@ router
   })
   .prefix('/admin/auth')
 
-/**
- * Public pages
- */
+// PUBLIC PAGES
 router.on('/').render('pages/home').as('home')
 router.on('/about').render('pages/about').as('about')
 router.on('/case-studies').render('pages/case_studies').as('case_studies')
 router.on('/services').render('pages/services').as('services')
 router.on('/contact').render('pages/contact').as('contact')
 
-/**
- * User-facing product pages
- */
+// PRODUCTS
 const ProductsController = () => import('#controllers/products_controller')
-router.get('/products', [ProductsController, 'index']).as('products.index')
-router.get('/products/:slug', [ProductsController, 'show']).as('products.show')
+router.get('/templates', [ProductsController, 'index']).as('products.index')
+router.get('/templates/:slug', [ProductsController, 'show']).as('products.show')
 
-/**
- * Auth-required features (Cart, Wishlist, Checkout)
- */
+// AUTHENTICATED USER PAGES
 router
   .group(() => {
     // Cart
@@ -90,12 +80,14 @@ router
         router.post('/', [CheckoutController, 'place']).as('checkout.place')
       })
       .prefix('/checkout')
+
+    const OrdersController = () => import('#controllers/orders_controller')
+    router.get('/orders', [OrdersController, 'index']).as('orders.index')
+    router.get('/orders/:id', [OrdersController, 'show']).as('orders.show')
   })
   .use(middleware.auth())
 
-/**
- * Admin manage products
- */
+// ADMIN AUTHORIZED PAGES
 const AdminProductsController = () => import('#controllers/admin/products_controller')
 router
   .group(() => {
@@ -110,3 +102,12 @@ router
   })
   .prefix('/admin')
   .use(middleware.admin())
+
+const DashboardAdminController = () => import('#controllers/dashboard_admin_controller')
+router.get('/admin/dashboard', [DashboardAdminController, 'index']).as('admin.dashboard')
+
+// router.get('/whoami', async ({ auth }) => {
+//   const web = auth.use('web')
+//   await web.check()
+//   return { isLoggedIn: web.isAuthenticated, user: web.user }
+// })

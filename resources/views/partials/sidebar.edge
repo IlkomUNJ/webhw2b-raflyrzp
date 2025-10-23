@@ -1,0 +1,50 @@
+<aside
+  class="fixed inset-y-0 left-0 z-50 w-64 -translate-x-full bg-white border-r shadow-sm transition-transform duration-200
+         peer-checked:translate-x-0
+         md:sticky md:top-0 md:h-screen md:translate-x-0 md:z-0"
+>
+  <div class="h-16 flex items-center px-4 border-b">
+    <a href="{{ route('home') }}" class="flex items-center gap-2">
+      <img src="/images/logo/logo-navbar.png" alt="ShiftUp" class="h-8 w-auto" />
+      <span class="font-semibold">ShiftUp Admin</span>
+    </a>
+  </div>
+
+  <nav class="p-3 space-y-1">
+    <a
+      href="{{ route('admin.dashboard') }}"
+      class="block rounded-md px-3 py-2 text-sm font-medium transition
+        {{ ((title || '').toLowerCase().includes('dashboard')) ? 'bg-[rgba(37,106,168,0.08)] text-primary' : 'text-gray-700 hover:bg-gray-50' }}"
+      aria-current="{{ ((title || '').toLowerCase().includes('dashboard')) ? 'page' : '' }}"
+    >Dashboard</a>
+
+    <a
+      href="{{ route('admin.products.index') }}"
+      class="block rounded-md px-3 py-2 text-sm font-medium transition
+        {{ ((title || '').toLowerCase().includes('product')) ? 'bg-[rgba(37,106,168,0.08)] text-primary' : 'text-gray-700 hover:bg-gray-50' }}"
+      aria-current="{{ ((title || '').toLowerCase().includes('product')) ? 'page' : '' }}"
+    >Products</a>
+
+    <a
+      href="{{ route('admin.products.create') }}"
+      class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+    >Create Product</a>
+
+    <div class="pt-2 mt-2 border-t">
+    </div>
+
+    <a
+      href="{{ route('products.index') }}"
+      class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+    >View Templates (Site)</a>
+    <a
+      href="{{ route('home') }}"
+      class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+    >Back to Website</a>
+
+    <form action="{{ route('admin.auth.logout') }}" method="post" class="pt-2 mt-2 border-t">
+      {{ csrfField() }}
+      <button class="w-full text-left rounded-md px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50">Logout</button>
+    </form>
+  </nav>
+</aside>
