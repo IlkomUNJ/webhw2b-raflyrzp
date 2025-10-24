@@ -36,7 +36,7 @@
           @endeach
           @if(!(order.items && order.items.length))
             <div class="px-4 py-6 text-center text-gray-500">
-              Tidak ada item.
+              No items in this order.
             </div>
           @end
         </div>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="mt-8">
-          <a href="{{ route('orders.index') }}" class="btn-secondary">← Kembali ke pesanan</a>
+          <a href="{{ route('user.orders.index') }}" class="btn-secondary">← Back to Orders</a>
         </div>
       </div>
     </section>

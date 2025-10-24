@@ -82,8 +82,8 @@ router
       .prefix('/checkout')
 
     const OrdersController = () => import('#controllers/orders_controller')
-    router.get('/orders', [OrdersController, 'index']).as('orders.index')
-    router.get('/orders/:id', [OrdersController, 'show']).as('orders.show')
+    router.get('/orders', [OrdersController, 'index']).as('user.orders.index')
+    router.get('/orders/:id', [OrdersController, 'show']).as('user.orders.show')
   })
   .use(middleware.auth())
 

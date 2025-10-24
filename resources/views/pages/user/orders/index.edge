@@ -9,7 +9,7 @@
 
         @if(!orders || orders.length === 0)
           <div class="mt-6 text-gray-500">
-            Belum ada pesanan.
+            You have no orders yet.
           </div>
         @else
           <div class="mt-6 overflow-x-auto">
@@ -42,7 +42,7 @@
                       Rp {{ Number(o.total).toLocaleString('id-ID') }}
                     </td>
                     <td class="px-4 py-2 text-right">
-                      <a href="{{ route('orders.show', { id: o.id }) }}" class="btn-primary btn-sm">Lihat</a>
+                      <a href="{{ route('user.orders.show', { id: o.id }) }}" class="btn-primary btn-sm">See</a>
                     </td>
                   </tr>
                 @endeach

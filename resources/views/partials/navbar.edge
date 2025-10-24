@@ -139,6 +139,29 @@
                   </span>
                 </a>
 
+                <a
+                  href="{{ route ? route('user.orders.index') : '/orders' }}"
+                  class="flex items-center justify-between px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                >
+                  <span class="inline-flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M9 12h6M9 16h6M7 4h10a2 2 0 012 2v14l-5-3-5 3V6a2 2 0 00-2-2z"
+                      />
+                    </svg>
+                    <span>Orders</span>
+                  </span>
+                </a>
+
                 <div class="my-1 border-t">
                 </div>
 
@@ -186,7 +209,6 @@
         class="block px-3 py-2 rounded-md text-base font-medium transition-colors {{ ((title || '').toLowerCase().includes('contact')) ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50' }}"
       >Contact</a>
 
-      <!-- Mobile: tetap tampilkan Cart dan Wishlist juga -->
       <a
         href="{{ route ? route('cart.index') : '/cart' }}"
         class="flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
@@ -237,6 +259,29 @@
             />
           </svg>
           <span>Wishlist</span>
+        </span>
+      </a>
+
+      <a
+        href="{{ route ? route('user.orders.index') : '/orders' }}"
+        class="flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+      >
+        <span class="inline-flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 text-gray-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M9 12h6M9 16h6M7 4h10a2 2 0 012 2v14l-5-3-5 3V6a2 2 0 00-2-2z"
+            />
+          </svg>
+          <span>Orders</span>
         </span>
       </a>
 
